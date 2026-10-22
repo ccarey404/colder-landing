@@ -1,0 +1,3 @@
+contact_id,contact_name,business,phone,timezone,called_at,caller,outcome,interest,note,next_action,follow_up_at,owner,do_not_contact
+EXAMPLE-001,Alex Smith,Example Roofing,+1-512-555-0142,America/New_York,2026-10-16T10:00:00-04:00,Jordan,callback_requested,interested,Asked for pricing,Call after sending details,2026-10-17T10:30:00-04:00,Mia,false
+EXAMPLE-002,Mia Chen,Example Realty,+1-512-555-0158,America/New_York,2026-10-16T10:08:00-04:00,Jordan,not_reached,unknown,No answer,Review for a later attempt,,Jordan,false
