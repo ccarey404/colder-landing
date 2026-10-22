@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Article } from "@/components/article";
-import { site } from "@/lib/site";
+import { operator } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <Article
-      eyebrow="Your information"
       title="Privacy, clearly."
       meta="Effective October 22, 2026"
       deck="This policy covers the Colder public website and waitlist, operated by Provarion LLC. The product is coming soon. This site does not record calls or collect prospect lists."
@@ -59,7 +58,7 @@ export default function PrivacyPage() {
       <h2>Your choices</h2>
       <p>
         You can ask to access, correct or delete your waitlist information, or stop receiving availability emails, by contacting{" "}
-        <a href={`mailto:${site.email}?subject=Colder%20privacy%20request`}>{site.email}</a>. Please write from the address you used to join so we
+        <a href={`mailto:${operator.email}?subject=Colder%20privacy%20request`}>{operator.email}</a>. Please write from the address you used to join so we
         can verify the request. Privacy rights depend on your location. We will review and respond to requests as applicable.
       </p>
 
@@ -70,7 +69,7 @@ export default function PrivacyPage() {
         required notice or choices.
       </p>
       <p>
-        Questions? Contact Provarion LLC at <a href={`mailto:${site.email}`}>{site.email}</a>.
+        Questions? Contact Provarion LLC at <a href={`mailto:${operator.email}`}>{operator.email}</a>.
       </p>
     </Article>
   );

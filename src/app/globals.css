@@ -1,66 +1,68 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #050607;
-  --color-panel: #0b0d11;
-  --color-raised: #12151b;
-  --color-line: rgb(255 255 255 / 0.08);
-  --color-line-strong: rgb(255 255 255 / 0.14);
-  --color-fg: #f5f6f8;
-  --color-muted: #9097a3;
-  --color-faint: #5d636e;
+  --color-frame: #e8e6e1;
+  --color-paper: #ffffff;
+  --color-surface: #f4f3ef;
+  --color-line: #e4e1db;
+  --color-line-strong: #cfcbc4;
+  --color-ink: #1f2023;
+  --color-body: #3f3d39;
+  --color-muted: #6b6862;
+  --color-faint: #9a968f;
   --color-brand: #2f5bff;
-  --color-brand-soft: #7d97ff;
-  --color-warm: #ffb547;
-  --color-ok: #3ddc97;
+  --color-brand-ink: #1f45db;
+  --color-brand-wash: #eef2ff;
+  --color-warm: #b45309;
+  --color-warm-wash: #fdf1e3;
+  --color-ok: #15803d;
+  --color-ok-wash: #e9f6ee;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  /* Charcoal darks, for dark surfaces on the site and inside the app mockups. */
+  --color-dark: #1b1c1f;
+  --color-dark-card: #232428;
+  --color-dark-raised: #2b2c31;
+  --color-dark-line: rgb(255 255 255 / 0.08);
+  --color-dark-row: #33343a;
+  --color-dark-pill: #3a3b42;
+  --color-dark-text: #f4f4f5;
+  --color-dark-muted: #a1a1aa;
+  --color-eye: #141518;
 
-  --animate-marquee: marquee 40s linear infinite;
-  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
-  --animate-rise: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-label: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  /* The app's own stack (Segoe UI on Windows, San Francisco on Apple). Only used inside .app-ui. */
+  --font-app: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  @keyframes marquee {
-    to { transform: translateX(-50%); }
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.35; }
-  }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(8px); }
+  --animate-fade: fade 0.35s ease-out both;
+
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: none; }
   }
 }
 
-@keyframes wf-progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
 @layer base {
   html {
-    color-scheme: dark;
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
   body {
-    background: var(--color-ink);
-    color: var(--color-fg);
+    background: var(--color-frame);
+    color: var(--color-ink);
     font-family: var(--font-sans);
+    font-size: 1rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   ::selection {
     background: var(--color-brand);
-    color: white;
+    color: #fff;
   }
   :focus-visible {
-    outline: 2px solid var(--color-brand-soft);
-    outline-offset: 3px;
-    border-radius: 6px;
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
   }
   summary {
     list-style: none;
@@ -72,28 +74,36 @@
 }
 
 @layer components {
-  .container-x {
+  .wrap {
     margin-inline: auto;
     width: 100%;
-    max-width: 76rem;
+    max-width: 78rem;
     padding-inline: 1.25rem;
   }
   @media (min-width: 768px) {
-    .container-x { padding-inline: 2rem; }
+    .wrap { padding-inline: 3rem; }
   }
 
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  .label {
+    font-family: var(--font-label);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-muted);
   }
 
-  .display {
-    font-weight: 600;
-    letter-spacing: -0.045em;
-    line-height: 0.95;
+  /* App mockups render in the app's system font, scoped so it can't leak into the page. */
+  .app-ui {
+    font-family: var(--font-app);
+    letter-spacing: normal;
   }
 
   .btn {
@@ -101,96 +111,95 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    height: 2.75rem;
+    height: 2.875rem;
     padding-inline: 1.25rem;
-    border-radius: 999px;
-    font-size: 0.9375rem;
+    border-radius: 6px;
+    font-size: 1rem;
     font-weight: 500;
     white-space: nowrap;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
   }
-  .btn:active { transform: scale(0.98); }
-  .btn-primary { background: var(--color-fg); color: var(--color-ink); }
-  .btn-primary:hover { background: white; box-shadow: 0 0 0 4px rgb(255 255 255 / 0.08); }
-  .btn-brand { background: var(--color-brand); color: white; }
-  .btn-brand:hover { background: #4269ff; box-shadow: 0 0 32px -4px rgb(47 91 255 / 0.7); }
-  .btn-ghost { border: 1px solid var(--color-line-strong); color: var(--color-fg); }
-  .btn-ghost:hover { border-color: rgb(255 255 255 / 0.3); background: rgb(255 255 255 / 0.04); }
+  .btn-sm { height: 2.375rem; padding-inline: 0.9rem; font-size: 0.9375rem; }
+  .btn-dark { background: var(--color-ink); color: #fff; }
+  .btn-dark:hover { background: var(--color-dark-raised); }
+  .btn-line { border: 1px solid var(--color-ink); color: var(--color-ink); background: var(--color-paper); }
+  .btn-line:hover { background: var(--color-surface); }
+  .btn-light { background: #fff; color: var(--color-ink); }
+  /* Plan buttons: the site's outline style, turning blue on hover and keyboard focus. */
+  .btn-plan:hover, .btn-plan:focus-visible { background: var(--color-brand); border-color: var(--color-brand); color: #fff; }
+  .btn-light:hover { background: #e9e9ea; }
 
-  .card {
-    border: 1px solid var(--color-line);
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.03), rgb(255 255 255 / 0.01));
-    border-radius: 1.25rem;
+  .link {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-line-strong);
+    transition: text-decoration-color 0.15s;
   }
+  .link:hover { text-decoration-color: var(--color-ink); }
 
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
+  .field {
+    height: 2.875rem;
+    width: 100%;
+    border-radius: 6px;
     border: 1px solid var(--color-line-strong);
-    border-radius: 999px;
-    padding: 0.25rem 0.625rem;
-    font-size: 0.75rem;
-    color: var(--color-muted);
-    white-space: nowrap;
+    background: #fff;
+    padding-inline: 0.875rem;
+    font-size: 1rem;
+    color: var(--color-ink);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
-
-  .grid-bg {
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 75%);
-  }
-
-  .fade-x {
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  }
+  .field::placeholder { color: var(--color-faint); }
+  .field:focus { border-color: var(--color-ink); box-shadow: 0 0 0 3px rgb(31 32 35 / 0.08); }
 
   /* Long-form pages: guides, help, legal */
   .prose-colder {
-    color: #c4c9d2;
+    color: var(--color-body);
     font-size: 1.0625rem;
     line-height: 1.75;
   }
   .prose-colder > * + * { margin-top: 1.25em; }
   .prose-colder h2 {
-    margin-top: 2.5em;
-    color: var(--color-fg);
-    font-size: 1.625rem;
-    font-weight: 600;
-    letter-spacing: -0.025em;
+    margin-top: 2.25em;
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 1.875rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
     line-height: 1.2;
   }
   .prose-colder h3 {
-    margin-top: 2em;
-    color: var(--color-fg);
+    margin-top: 1.75em;
+    color: var(--color-ink);
     font-size: 1.1875rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
   }
-  .prose-colder a { color: var(--color-fg); text-decoration: underline; text-decoration-color: var(--color-brand); text-underline-offset: 3px; }
-  .prose-colder a:hover { color: var(--color-brand-soft); }
-  .prose-colder strong { color: var(--color-fg); font-weight: 600; }
+  .prose-colder a { color: var(--color-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--color-line-strong); }
+  .prose-colder a:hover { text-decoration-color: var(--color-ink); }
+  .prose-colder strong { color: var(--color-ink); font-weight: 600; }
   .prose-colder ul { list-style: disc; padding-left: 1.25em; }
   .prose-colder ol { list-style: decimal; padding-left: 1.25em; }
   .prose-colder li + li { margin-top: 0.5em; }
-  .prose-colder li::marker { color: var(--color-brand-soft); }
+  .prose-colder li::marker { color: var(--color-faint); }
   .prose-colder blockquote {
-    border-left: 2px solid var(--color-brand);
+    border-left: 2px solid var(--color-ink);
     padding: 0.25em 0 0.25em 1.25em;
-    color: var(--color-fg);
-    font-style: italic;
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 1.1875rem;
   }
   .prose-colder table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.5; }
-  .prose-colder caption { caption-side: top; text-align: left; padding-bottom: 0.75em; color: var(--color-fg); font-weight: 600; }
+  .prose-colder caption { caption-side: top; text-align: left; padding-bottom: 0.75em; color: var(--color-ink); font-weight: 600; }
   .prose-colder th, .prose-colder td { border-bottom: 1px solid var(--color-line); padding: 0.75em 1em 0.75em 0; text-align: left; vertical-align: top; }
-  .prose-colder th { color: var(--color-muted); font-weight: 500; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .prose-colder thead th { color: var(--color-muted); font-weight: 500; font-size: 0.8125rem; }
   .table-wrap { overflow-x: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  /* Motion-animated elements render in their final state */
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

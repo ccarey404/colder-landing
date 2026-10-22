@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 const paths = [
   "",
   "/cold-call-tracker",
+  "/pricing",
   "/guides",
   "/guides/how-to-start-cold-calling",
   "/guides/how-to-track-cold-calls",

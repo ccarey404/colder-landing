@@ -1,49 +1,44 @@
 import Link from "next/link";
+import { FooterArt } from "./footer-art";
 import { Logo } from "./logo";
 import { footerNav, site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line">
-      <div className="container-x grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div className="max-w-xs">
-          <Logo />
-          <p className="mt-4 text-sm leading-relaxed text-muted">
-            A clearer next step. One conversation at a time.
-          </p>
-          <a
-            href={`mailto:${site.email}`}
-            className="mt-6 inline-block text-sm text-muted transition-colors hover:text-fg"
-          >
-            {site.email}
-          </a>
+    <footer className="bg-frame text-ink">
+      <div className="wrap">
+        <div className="mx-auto max-w-4xl pt-12 sm:pt-16">
+          <FooterArt />
         </div>
+        <div className="border-t border-line-strong/70" />
 
-        {footerNav.map((col) => (
-          <div key={col.title}>
-            <h2 className="eyebrow">{col.title}</h2>
-            <ul className="mt-4 space-y-3">
-              {col.links.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-muted transition-colors hover:text-fg">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <div className="grid gap-12 py-14 lg:grid-cols-[21rem_1fr] lg:gap-0">
+          <div className="lg:border-r lg:border-line-strong/70 lg:pr-10">
+            <Logo size={26} href="/" />
+            <p className="mt-5 text-sm text-muted">
+              © {new Date().getFullYear()} {site.company} ·{" "}
+              <a href={`mailto:${site.email}`} className="transition-colors hover:text-ink">
+                {site.email}
+              </a>
+            </p>
           </div>
-        ))}
-      </div>
 
-      <div className="container-x">
-        <div className="flex flex-col gap-2 border-t border-line py-6 text-xs text-faint sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} {site.company}. Colder is in private pilot.</p>
-          <p>
-            Designed by{" "}
-            <a href="https://jbinvestments.xyz/" className="transition-colors hover:text-fg">
-              JBI
-            </a>
-          </p>
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:pl-12">
+            {footerNav.map((col) => (
+              <div key={col.title}>
+                <h2 className="text-[0.9375rem] font-medium">{col.title}</h2>
+                <ul className="mt-3 space-y-2">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <Link href={l.href} className="text-[0.9375rem] text-muted transition-colors hover:text-ink">
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
-import { Check } from "@/components/ui";
-import { site } from "@/lib/site";
+import { Arrow, Check } from "@/components/ui";
+import { operator } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Join the waitlist",
-  description: "Get free early access to Colder, the cold call tracker for callers and agencies.",
+  description: "Join the waitlist for Colder, the cold call tracker for callers and agencies.",
   alternates: { canonical: "/waitlist" },
 };
 
@@ -15,43 +15,36 @@ export default async function WaitlistPage({ searchParams }: { searchParams: Pro
   const agency = as === "agency";
 
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden pb-24 pt-32 sm:pt-40">
-      <div aria-hidden className="grid-bg absolute inset-0" />
-      <div aria-hidden className="absolute left-1/2 top-0 h-96 w-[48rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/30 blur-[120px]" />
+    <section className="wrap grid gap-14 py-16 sm:py-24 lg:grid-cols-[1fr_28rem] lg:gap-24">
+      <div>
+        <Link href="/" className="mb-10 inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink">
+          <Arrow className="rotate-180" /> Back to Colder
+        </Link>
+        <h1 className="display text-[3.25rem] text-balance sm:text-7xl">Join the waitlist.</h1>
+        <p className="mt-6 max-w-md text-xl leading-relaxed text-muted">We&apos;ll email you when access opens.</p>
+        <ul className="mt-10 space-y-3 text-body">
+          {["No card or payment to join", "Leave the list anytime"].map((p) => (
+            <li key={p} className="flex items-center gap-3">
+              <Check />
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <div className="container-x relative grid gap-16 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-        <div>
-          <Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
-            <span aria-hidden>←</span> Back to Colder
-          </Link>
-          <h1 className="display text-6xl text-balance sm:text-7xl">Get free early access.</h1>
-          <p className="mt-6 max-w-md text-xl leading-relaxed text-muted">
-            Colder is on the way. Join the waitlist for your invitation.
-          </p>
-          <ul className="mt-10 space-y-3">
-            {["Free plan at launch", "No card or payment required", "Leave the list anytime"].map((p) => (
-              <li key={p} className="flex items-center gap-3">
-                <Check className="text-brand-soft" />
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="card p-6 backdrop-blur sm:p-8">
-          <h2 className="text-xl font-semibold tracking-tight">{agency ? "Register team interest" : "Join the waitlist"}</h2>
-          <p className="mb-6 mt-2 text-sm text-muted">
-            We save your email, whether you&apos;re a caller or a team, and your consent to availability emails. Nothing else.
-          </p>
-          <WaitlistForm source={agency ? "waitlist-agency" : "waitlist"} defaultAudience={agency ? "agency" : "individual"} layout="stacked" />
-          <p className="mt-6 border-t border-line pt-6 text-xs text-faint">
-            Joining doesn&apos;t create an account or guarantee an invitation. To correct your address or leave,{" "}
-            <a href={`mailto:${site.email}`} className="underline underline-offset-2 hover:text-fg">
-              email us
-            </a>{" "}
-            from the address you used.
-          </p>
-        </div>
+      <div className="rounded-xl border border-line-strong p-6 sm:p-8">
+        <h2 className="text-xl font-semibold tracking-[-0.01em]">{agency ? "Register team interest" : "Join the waitlist"}</h2>
+        <p className="mb-7 mt-2 text-[0.9375rem] text-muted">
+          We save your email, caller or team, and your consent. Nothing else.
+        </p>
+        <WaitlistForm source={agency ? "waitlist-agency" : "waitlist"} defaultAudience={agency ? "agency" : "individual"} askAudience />
+        <p className="mt-7 border-t border-line pt-6 text-[0.8125rem] text-muted">
+          Joining doesn&apos;t create an account. To leave,{" "}
+          <a href={`mailto:${operator.email}`} className="link">
+            email us
+          </a>{" "}
+          from the address you used.
+        </p>
       </div>
     </section>
   );

@@ -14,12 +14,11 @@ export default function StartGuide() {
   return (
     <Article
       back={{ href: "/guides", label: "Cold calling guides" }}
-      eyebrow="01 / Start"
       title="How to start cold calling"
-      deck="Choose one kind of customer, prepare a relevant reason to call, and make a short list. Set aside a manageable session, use an honest opener and record the next step after each conversation."
+      deck="Pick one audience, prepare a relevant reason to call, and record the next step after each call."
       meta={
         <>
-          By <Link href="/about" className="text-muted hover:text-fg">Colder team</Link> · October 16, 2026 · 6 minute read
+          By <Link href="/about" className="text-muted hover:text-ink">Colder team</Link> · October 16, 2026 · 6 minute read
         </>
       }
       toc={[
@@ -216,8 +215,8 @@ export default function StartGuide() {
         example and clear metric definitions.
       </p>
 
-      <Callout title="Make the next call easier to start." action={{ href: "/waitlist", label: "Get free early access" }}>
-        Colder is being built around that routine. Join the waitlist for free early access when the public app opens. You can use the{" "}
+      <Callout title="Make the next call easier to start." action={{ href: "/waitlist", label: "Join the waitlist" }}>
+        Colder is built around that routine. You can use the{" "}
         <Link href="/guides/how-to-track-cold-calls#template">free tracker</Link> today.
       </Callout>
 

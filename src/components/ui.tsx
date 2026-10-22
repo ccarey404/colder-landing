@@ -2,22 +2,45 @@ import Link from "next/link";
 import { WaitlistForm } from "./waitlist-form";
 
 export function SectionHead({
-  eyebrow,
   title,
   body,
   center = false,
+  className = "",
 }: {
-  eyebrow: string;
   title: React.ReactNode;
   body?: React.ReactNode;
   center?: boolean;
+  className?: string;
 }) {
   return (
-    <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-4 text-4xl font-semibold tracking-[-0.035em] text-balance sm:text-5xl">{title}</h2>
+    <div className={`${center ? "mx-auto max-w-2xl text-center" : "max-w-xl"} ${className}`}>
+      <h2 className="display text-[2.5rem] text-balance sm:text-[3.25rem]">{title}</h2>
       {body && <p className="mt-5 text-lg leading-relaxed text-muted text-pretty">{body}</p>}
     </div>
+  );
+}
+
+export function Chevron({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" className={`size-4 shrink-0 ${className}`} fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <path d="M4 6l4 4 4-4" />
+    </svg>
+  );
+}
+
+export function Arrow({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" className={`size-4 shrink-0 ${className}`} fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <path d="M3 8h10M9 4l4 4-4 4" />
+    </svg>
+  );
+}
+
+export function Check({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" className={`size-4 shrink-0 ${className}`} fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+      <path d="M3.5 8.5l3 3 6-7" />
+    </svg>
   );
 }
 
@@ -26,16 +49,11 @@ export function Faq({ items }: { items: { q: string; a: React.ReactNode }[] }) {
     <div className="divide-y divide-line border-y border-line">
       {items.map((item) => (
         <details key={item.q} className="group">
-          <summary className="flex items-center justify-between gap-6 py-6 text-lg font-medium tracking-tight transition-colors hover:text-brand-soft">
+          <summary className="flex items-center justify-between gap-6 py-5 text-lg font-medium transition-colors hover:text-brand">
             {item.q}
-            <span
-              aria-hidden
-              className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong text-muted transition-transform duration-300 group-open:rotate-45"
-            >
-              +
-            </span>
+            <Chevron className="text-muted transition-transform duration-200 group-open:rotate-180" />
           </summary>
-          <div className="pb-6 pr-12 leading-relaxed text-muted">{item.a}</div>
+          <div className="pb-6 pr-10 leading-relaxed text-muted">{item.a}</div>
         </details>
       ))}
     </div>
@@ -44,7 +62,7 @@ export function Faq({ items }: { items: { q: string; a: React.ReactNode }[] }) {
 
 export function CtaBand({
   title = "Your next call starts here.",
-  body = "Join the waitlist for free early access when Colder opens.",
+  body = "Join the waitlist.",
   source,
 }: {
   title?: string;
@@ -52,16 +70,12 @@ export function CtaBand({
   source: string;
 }) {
   return (
-    <section className="container-x py-24 sm:py-32">
-      <div className="relative overflow-hidden rounded-[2rem] border border-line-strong bg-panel px-6 py-16 sm:px-16 sm:py-24">
-        <div aria-hidden className="grid-bg absolute inset-0 opacity-60" />
-        <div aria-hidden className="absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/40 blur-3xl" />
-        <div className="relative mx-auto max-w-xl text-center">
-          <h2 className="display text-5xl text-balance sm:text-7xl">{title}</h2>
-          <p className="mt-5 text-lg text-muted">{body}</p>
-          <div className="mx-auto mt-10 max-w-lg text-left">
-            <WaitlistForm source={source} />
-          </div>
+    <section className="p-3 sm:p-4">
+      <div className="rounded-xl bg-dark px-6 py-20 text-white sm:px-16 sm:py-28">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="display text-[2.75rem] text-balance sm:text-6xl">{title}</h2>
+          <p className="mt-5 text-lg text-white/60">{body}</p>
+          <WaitlistForm source={source} tone="dark" className="mx-auto mt-10 max-w-md" />
         </div>
       </div>
     </section>
@@ -69,41 +83,28 @@ export function CtaBand({
 }
 
 export function PageHeader({
-  eyebrow,
   title,
   body,
   back,
   children,
 }: {
-  eyebrow?: string;
   title: React.ReactNode;
   body?: React.ReactNode;
   back?: { href: string; label: string };
   children?: React.ReactNode;
 }) {
   return (
-    <header className="relative overflow-hidden border-b border-line pb-16 pt-32 sm:pt-40">
-      <div aria-hidden className="grid-bg absolute inset-0" />
-      <div aria-hidden className="absolute left-1/2 top-0 h-72 w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/25 blur-3xl" />
-      <div className="container-x relative max-w-3xl">
+    <header className="border-b border-line pb-14 pt-16 sm:pb-20 sm:pt-24">
+      <div className="wrap max-w-[52rem]">
         {back && (
-          <Link href={back.href} className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
-            <span aria-hidden>←</span> {back.label}
+          <Link href={back.href} className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink">
+            <Arrow className="rotate-180" /> {back.label}
           </Link>
         )}
-        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-        <h1 className="display mt-4 text-5xl text-balance sm:text-6xl">{title}</h1>
-        {body && <div className="mt-6 text-lg leading-relaxed text-muted text-pretty">{body}</div>}
+        <h1 className="display text-[2.75rem] text-balance sm:text-6xl">{title}</h1>
+        {body && <div className="mt-6 text-lg leading-relaxed text-muted text-pretty sm:text-xl">{body}</div>}
         {children}
       </div>
     </header>
-  );
-}
-
-export function Check({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 16" className={`size-4 shrink-0 ${className}`} fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
-      <path d="M3 8.5l3.2 3L13 4.5" />
-    </svg>
   );
 }

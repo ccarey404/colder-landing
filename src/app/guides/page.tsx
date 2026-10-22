@@ -25,50 +25,62 @@ const guides = [
   },
 ];
 
+function ArrowUpRight({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 16 16" className={`shrink-0 ${className}`} fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <path d="M5 11l6-6M6 5h5v5" />
+    </svg>
+  );
+}
+
 export default function GuidesPage() {
   return (
     <>
-      <PageHeader eyebrow="The calling playbook" title="Start. Track. Repeat." body="Practical help for your next calling session." />
+      <PageHeader title="Start. Track. Repeat." body="Practical help for your next calling session." />
 
-      <section className="container-x py-16 sm:py-20">
-        <div className="grid gap-4 md:grid-cols-2">
+      <section className="wrap max-w-[52rem] py-10 sm:py-14">
+        <ul>
           {guides.map((g) => (
-            <Link key={g.href} href={g.href} className="card group flex min-h-72 flex-col p-8 transition-colors hover:border-line-strong hover:bg-white/[0.03]">
-              <p className="eyebrow">{g.tag}</p>
-              <h2 className="mt-auto pt-12 text-3xl font-semibold tracking-tight sm:text-4xl">{g.title}</h2>
-              <p className="mt-3 text-muted">{g.body}</p>
-              <p className="mt-8 flex items-center justify-between text-sm text-faint">
-                {g.meta}
-                <span aria-hidden className="transition-transform group-hover:translate-x-1 group-hover:text-fg">→</span>
-              </p>
-            </Link>
-          ))}
-        </div>
-
-        <div className="relative mt-4 overflow-hidden rounded-[1.25rem] border border-brand/40 bg-gradient-to-br from-brand/[0.14] to-transparent p-8 sm:p-12">
-          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <p className="eyebrow">Free template</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Your first call tracker.</h2>
-              <p className="mt-3 max-w-md text-muted">Calls, follow-ups and clear totals. Excel or Google Sheets. No signup.</p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
-              <a href="/downloads/cold-call-tracker.xlsx" download className="btn btn-brand">
-                Download template
-              </a>
-              <Link href="/guides/how-to-track-cold-calls#template" className="btn btn-ghost">
-                Setup and CSV version
+            <li key={g.href} className="border-b border-line">
+              <Link href={g.href} className="group grid gap-3 py-10 sm:grid-cols-[11rem_1fr_auto] sm:gap-8 sm:py-12">
+                <p className="label pt-2">{g.tag}</p>
+                <div>
+                  <h2 className="display text-[2rem] transition-colors group-hover:text-brand sm:text-[2.5rem]">{g.title}</h2>
+                  <p className="mt-3 text-lg text-muted">{g.body}</p>
+                  <p className="mt-6 text-sm text-muted">{g.meta}</p>
+                </div>
+                <ArrowUpRight className="hidden size-6 text-muted transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink sm:block" />
               </Link>
-            </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-14 flex flex-col justify-between gap-6 rounded-xl bg-surface p-7 sm:flex-row sm:items-center sm:p-10">
+          <div>
+            <h2 className="display text-[2rem]">Your first call tracker.</h2>
+            <p className="mt-2 text-muted">Calls, follow-ups and clear totals. Excel or Google Sheets. No signup.</p>
           </div>
+          <a href="/downloads/cold-call-tracker.xlsx" download className="btn btn-line shrink-0">
+            Download template
+            <svg viewBox="0 0 16 16" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+              <path d="M8 2v8m0 0L5 7m3 3l3-3M3 13h10" />
+            </svg>
+          </a>
         </div>
 
-        <p className="mt-10 text-sm text-muted">
-          Looking for product details?{" "}
-          <Link href="/help" className="text-fg underline decoration-brand underline-offset-4">
-            Visit Colder help
-          </Link>
-        </p>
+        <div className="mt-8 space-y-4 text-[0.9375rem]">
+          <p>
+            <Link href="/guides/how-to-track-cold-calls#template" className="link">
+              Setup instructions and a plain CSV version
+            </Link>
+          </p>
+          <p className="text-muted">
+            Looking for product details?{" "}
+            <Link href="/help" className="inline-flex items-center gap-1 font-medium text-ink hover:text-brand">
+              Visit Colder help <ArrowUpRight className="size-3.5" />
+            </Link>
+          </p>
+        </div>
       </section>
     </>
   );

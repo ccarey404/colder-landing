@@ -6,3 +6,6 @@ next-env.d.ts
 .env*.local
 .env
 .vercel
+
+# Local design screenshots (contain real lead data)
+design-reference/

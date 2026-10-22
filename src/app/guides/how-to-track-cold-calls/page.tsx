@@ -38,12 +38,11 @@ export default function TrackGuide() {
   return (
     <Article
       back={{ href: "/guides", label: "Cold calling guides" }}
-      eyebrow="02 / Track"
       title="How to track cold calls"
-      deck="Log who you called, when you called, what happened and what to do next. Keep one record per attempt, with every attempt linked to the same contact."
+      deck="Log who you called, what happened and what’s next, with every attempt on one contact."
       meta={
         <>
-          By <Link href="/about" className="text-muted hover:text-fg">Colder team</Link> · October 16, 2026 · 7 minute read
+          By <Link href="/about" className="text-muted hover:text-ink">Colder team</Link> · October 16, 2026 · 7 minute read
         </>
       }
       toc={[
@@ -58,15 +57,15 @@ export default function TrackGuide() {
         who needs a call next, and why?
       </p>
 
-      <section id="template" className="not-prose mt-10 rounded-2xl border border-brand/40 bg-gradient-to-br from-brand/[0.14] to-transparent p-8">
-        <p className="eyebrow">Free template</p>
-        <h2 className="!mt-3 text-2xl font-semibold tracking-tight text-fg">Your call tracker, ready.</h2>
+      <section id="template" className="!mt-10 rounded-xl bg-surface p-7 sm:p-9">
+        <p className="label">Free template</p>
+        <h2 className="!mt-3">Your call tracker, ready.</h2>
         <p className="mt-3 text-muted">
           A free workbook with a call log, outcome dropdowns, a separate follow-up queue and automatic session totals. The sample names are
           fictional. No signup, macros or external connections.
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-4">
-          <a href="/downloads/cold-call-tracker.xlsx" download className="btn btn-brand !text-white !no-underline">
+          <a href="/downloads/cold-call-tracker.xlsx" download className="btn btn-dark !text-white !no-underline">
             Download Excel tracker
           </a>
           <span className="text-sm text-muted">
@@ -99,9 +98,9 @@ export default function TrackGuide() {
           <tbody>
             {fields.map(([f, w, e]) => (
               <tr key={f}>
-                <th scope="row" className="!text-fg !normal-case !tracking-normal !text-[0.9375rem]">{f}</th>
+                <th scope="row" className="!text-ink !normal-case !tracking-normal !text-[0.9375rem]">{f}</th>
                 <td>{w}</td>
-                <td className="font-mono text-[0.8125rem]">{e}</td>
+                <td className="text-[0.875rem]">{e}</td>
               </tr>
             ))}
           </tbody>
@@ -186,7 +185,7 @@ export default function TrackGuide() {
           <tbody>
             {metrics.map(([m, c]) => (
               <tr key={m}>
-                <td className="whitespace-nowrap text-fg">{m}</td>
+                <td className="whitespace-nowrap text-ink">{m}</td>
                 <td>{c}</td>
               </tr>
             ))}
@@ -205,8 +204,8 @@ export default function TrackGuide() {
         needs access controls and an obvious owner for each lead.
       </p>
 
-      <Callout title="That's the workflow we're building." action={{ href: "/waitlist", label: "Get free early access" }}>
-        Colder brings that routine into one workspace. Public access is not open yet; join the waitlist for free early access.{" "}
+      <Callout title="That's the workflow we're building." action={{ href: "/waitlist", label: "Join the waitlist" }}>
+        Colder brings that routine into one workspace.{" "}
         <Link href="/cold-call-tracker">See the planned workflow.</Link>
       </Callout>
 

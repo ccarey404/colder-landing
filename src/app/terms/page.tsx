@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Article } from "@/components/article";
-import { site } from "@/lib/site";
+import { operator } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Website terms",
@@ -12,9 +12,8 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <Article
-      eyebrow="The public website"
       title="A clear starting point."
-      meta="Effective October 16, 2026"
+      meta="Effective October 22, 2026"
       deck="These terms cover the Colder website and waitlist operated by Provarion LLC. They are not paid product or calling-service terms."
     >
       <h2 className="!mt-0">Coming soon means coming soon</h2>
@@ -32,10 +31,10 @@ export default function TermsPage() {
 
       <h2>Pricing</h2>
       <p>
-        The announced launch offer includes a free plan with a calling allowance that will be published before launch. The announced paid
-        individual subscription price is $18 per month. Included usage, any additional charges, team pricing, billing and cancellation terms will
-        be stated before purchase. We do not take payment through the waitlist. No trial, unlimited calling allowance or performance guarantee is
-        offered here.
+        There is no free plan. Individual plans are $18 (Core), $78 (Growth) or $148 (Scale) per month. Team plans are priced per person per
+        month at the same rates, for 2–10 people. Enterprise pricing is agreed individually. Plans are billed monthly and can be cancelled anytime;
+        billing terms are stated before purchase. We do not take payment through the waitlist. No trial, unlimited usage or performance guarantee
+        is offered here.
       </p>
 
       <h2>Using the website</h2>
@@ -54,7 +53,7 @@ export default function TermsPage() {
       <h2>Privacy and contact</h2>
       <p>
         Our <Link href="/privacy">Privacy Policy</Link> explains the information collected by the waitlist. For support, privacy requests or
-        questions about these website terms, email <a href={`mailto:${site.email}`}>{site.email}</a>.
+        questions about these website terms, email <a href={`mailto:${operator.email}`}>{operator.email}</a>.
       </p>
     </Article>
   );
